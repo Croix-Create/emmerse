@@ -13,20 +13,12 @@ class ProudctController extends Controller
         $request->validate([
             'id' => 'required|string',
             'name'  => 'required|string',
-            'description'  => 'required|string',
-            'price' => 'required|numeric',
-            'image_url' => 'required|string',
+            'description'  => 'required|text',
+            'price' => 'required|decimal',
+            'image_url',
         ]);
 
         return response()->json(['message' => 'Products created successfully']);
     }
-
-    public function cart(Request $price) 
-    {
-        $price->validate([
-            'id' => 'required|string',
-            'price' => 'required|float',
-            'image_url' => 'required|string'
-        ]);
-    }
+    
 }
