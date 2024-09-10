@@ -6,8 +6,16 @@ use App\Models\Product;
 
 use Illuminate\Http\Request;
 
-class ProudctController extends Controller
+class ProductController extends Controller
 {
+
+    public function index()
+    {
+        return view('index.product', [
+            'products' => Product::getAllProducts()
+            ->paginate(10)->withQueryString()
+        ]);
+    }
     public function store(Request $request)
     {
         $request->validate([
@@ -18,7 +26,8 @@ class ProudctController extends Controller
             'image_url',
         ]);
 
-        return response()->json(['message' => 'Products created successfully']);
+        return response()->json(['message' => 'Product added to DB successfully']);
     }
+
     
 }

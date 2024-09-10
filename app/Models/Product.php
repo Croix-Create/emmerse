@@ -9,12 +9,22 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
+    protected $fillable 
+    = 
+    [
+        
         'id',
         'name',
         'description',
         'price',
         'image_url'
+
     ];
 
+    public function getProducts() 
+    {
+
+        $products = DB::select('CALL GetAllProducts');
+
+    }
 }

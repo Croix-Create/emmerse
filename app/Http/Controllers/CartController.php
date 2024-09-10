@@ -7,15 +7,25 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $cart)
     {
-        $request->validate([
+        $cart->validate([
             'product_id' => 'required|string',
             'name'  => 'required|string',
             'quantity', 'required|integer',
             'price' => 'required|decimal',
         ]);
+    }
 
-        return response()->json(['message' => 'Products created successfully']);
+    public function checkout(Request $cart, $total) 
+    {
+        $total = $cart->price . $cart->quantity;
+
+        return pay($cart, $total);
+    }
+
+    public function pay($cart, $total)
+    {
+        return view ('checkout.pay');
     }
 }
